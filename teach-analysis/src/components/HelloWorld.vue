@@ -5,9 +5,9 @@
         <el-col :span="8">
           <div class="indexTitleLeft">
             {{courseName}}{{sourseTitle}}
-            <!-- <el-button type="primary" @click="httpAiClsresult">后端测试</el-button> -->
-            <!-- <el-button type="primary" @click="httpAiAnaly">后端测试2</el-button>  -->  
-            </div>
+<!--             <el-button type="primary" @click="test">后端测试</el-button>
+            <el-button type="primary" @click="test2">后端测试2</el-button> -->
+          </div>
         </el-col>
         <el-col :span="8"><div class="indexTitleMiddle">教学分析报告</div></el-col>
         <el-col :span="8"><div class="indexTitleRight">{{className}}</div></el-col>
@@ -94,11 +94,11 @@
               <div id="linePicture3" v-show="linePictureSelect == 3" style="width: 1120px;height: 300px"></div>
             </div>
             <div class="linePictureInfo"> 
-              <div @click="stepClick(stepOne)" style="text-align:center;width:110px;height:58px;position:absolute;" v-for="stepOne in step" v-bind:style="getStepStyle(stepOne)">
+              <div @click="stepClick(stepOne)" class="stepDiv" v-for="stepOne in step" v-bind:style="getStepStyle(stepOne)">
                 <el-tooltip effect="dark" placement="top-start"> 
                   <div slot="content">{{getStepName(stepOne.type)}} 时间:{{timeToFormatMinSec(stepOne.begin)}}-{{timeToFormatMinSec(stepOne.end)}}</div>
-                  <span  style="width:100%;height:100%;color:#ff0000;font-size:20px">
-                    <!-- {{getStepName(stepOne.type)}} -->
+                  <span>
+                    
                   </span>                  
                 </el-tooltip>
               </div>
@@ -333,9 +333,9 @@ export default {
         sources: [{
           type: "",
           //src: "/analysis/enqiang.mp4" //url地址
-          src: ""
+          //src: ""
           //src: this.sourcesSrc
-          //src: "http://172.31.23.184:18899/enqiang.mp4" //url地址
+          src: "/analysis/r1.mp4" //url地址
         }],
         poster: "", //你的封面地址
         // width: document.documentElement.clientWidth,
@@ -480,10 +480,6 @@ export default {
       });       
          
       //播放
-      //let _time = this.$refs.videoPlayer.player.currentTime(); //已播放时长
-      // console.log("this.$refs.videoPlayer.player.src");
-      // console.log(this.$refs.videoPlayer.player.src());
-      // console.log(this.$refs.videoPlayer.player.src()!="");
       if(this.$refs.videoPlayer.player.src()!=""){
         this.$refs.videoPlayer.player.currentTime(beginTime);
         this.$refs.videoPlayer.player.play();
@@ -492,6 +488,15 @@ export default {
     }
   },
   methods: {
+    test: function(){ 
+      console.log("test");
+      //this.$refs.videoPlayer.player.src("/analysis/r1.mp4");
+      this.$refs.videoPlayer.player.play();
+    },    
+    test2: function(){ 
+      console.log("test");
+      this.$refs.videoPlayer.player.src("/analysis/enqiang.mp4");
+    },      
     getStepName: function(step){ 
       if(step == 0){
         return "教师授课";
@@ -510,20 +515,44 @@ export default {
     getStepStyle: function(stepOne){
       // console.log("getStepStyle");
       // console.log(stepOne);
+      var height = '58px';
       var marginTop = '0px';
       var marginLeft = stepOne.id*120 + 'px';
+      var backgroundColor = '#ff0000';
+      var width = '110px';
+      var backgroundImage = 'url(./static/step'+stepOne.type+'.png)';
       if(stepOne.type == -2){
-        marginTop ='8px';
         marginLeft = '-120px';
+        height = '48px';
       }else{
-        var mid = (stepOne.begin+stepOne.end)/2;
-        var left = mid/this.timespan*1120;
+        height = '18px';
+        marginTop ='16px';
+        backgroundImage = '';
+        var left = stepOne.begin/this.timespan*1038;
         marginLeft = left + 'px';
+        width = ((stepOne.end-stepOne.begin)/this.timespan*1038)+1 + 'px';
       }
+      if(stepOne.type == -2){
+        backgroundColor = '#ff000000';
+      }else if(stepOne.type == -1){
+        backgroundColor = '#FCE16F';
+      }else if(stepOne.type == 0){
+        backgroundColor = '#94DDAF';
+      }else if(stepOne.type == 1){
+        backgroundColor = '#ADCD29';
+      }else if(stepOne.type == 2){
+        backgroundColor = '#2BDED3';
+      }else if(stepOne.type == 3){
+        backgroundColor = '#33A4DF';
+      }
+
       var style = {
-        'backgroundImage':'url(./static/step'+stepOne.type+'.png)',
+        'height':height,
+        'backgroundImage':backgroundImage,
         'margin-left': marginLeft,
         'margin-top':marginTop,
+        'background-color':backgroundColor,
+        'width': width,
 
       };
       return style;     
@@ -556,10 +585,9 @@ export default {
         vm.className = response.body.data.className;
         vm.courseTime = response.body.data.time;
         vm.roomName = response.body.data.room;
-        //vm.playerOptions.sources.src = "/analysis/"+response.body.data.source;
-        //vm.$refs.videoPlayer.player.play();
         this.$refs.videoPlayer.player.src("/analysis/"+response.body.data.source);
-        //courseName: "新员工培训", sourseTitle: "第一讲", className: "测试部门", time: "2019-01-16 / 16:00:00~17:18:00", source: "enqiang.mp4",
+        // this.$refs.videoPlayer.player.currentTime(0);
+        // this.$refs.videoPlayer.player.play();
         },function(response){
           //响应错误回调
         }
@@ -925,7 +953,8 @@ export default {
           },
           tooltip : {
               trigger: 'item',
-              formatter: "{a} <br/>{b} : {c} ({d}%)"
+              //formatter: "{a} <br/>{b} : {c} ({d}%)"
+              formatter: "{a} <br/>{b} : {d}%"
           },
           color:['#44DDF0', '#78D780','#FCE872','#AB91ED','#E97FA0'],
           legend: {
@@ -1081,6 +1110,31 @@ export default {
                     },                    
                 }
             ],
+
+
+            tooltip: {
+              trigger: 'axis',
+              formatter: function (params, ticket, callback) {
+                var htmlStr = '';
+                for(var i=0;i<params.length;i++){
+                var param = params[i];
+                var xName = param.name;//x轴的名称
+                var seriesName = param.seriesName;//图例名称
+                var value = param.value;//y轴值
+                var color = param.color;//图例颜色
+                if(i===0){
+                  htmlStr += xName + '<br/>';//x轴的名称
+                }
+                htmlStr +='<div>';
+                //为了保证和原来的效果一样，这里自己实现了一个点的效果
+                htmlStr += '<span style="margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:'+color+';"></span>';
+                //圆点后面显示的文本
+                htmlStr += seriesName + '：' + value + '%';
+                htmlStr += '</div>';
+                }
+                return htmlStr;
+              }
+            },
             series : [
                 {
                     name:'情感',
@@ -1102,7 +1156,7 @@ export default {
                     },   
                     itemStyle: {
                       color: '#05BDC5',
-                    },               
+                    },                                
                     data:this.emotionSeriesData,
                 }
             ]
@@ -1118,15 +1172,15 @@ export default {
             title: {
                 text: ''
             },
-            tooltip : {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    label: {
-                        backgroundColor: '#6a7985'
-                    }
-                }
-            },
+            // tooltip : {
+            //     trigger: 'axis',
+            //     axisPointer: {
+            //         type: 'cross',
+            //         label: {
+            //             backgroundColor: '#6a7985'
+            //         }
+            //     }
+            // },
             // legend: {
             //     left:0,
             //     top:50,
@@ -1188,7 +1242,30 @@ export default {
                       }
                     },                    
                 }
-            ], 
+            ],
+            tooltip: {
+              trigger: 'axis',
+              formatter: function (params, ticket, callback) {
+                var htmlStr = '';
+                for(var i=0;i<params.length;i++){
+                var param = params[i];
+                var xName = param.name;//x轴的名称
+                var seriesName = param.seriesName;//图例名称
+                var value = param.value;//y轴值
+                var color = param.color;//图例颜色
+                if(i===0){
+                  htmlStr += xName + '<br/>';//x轴的名称
+                }
+                htmlStr +='<div>';
+                //为了保证和原来的效果一样，这里自己实现了一个点的效果
+                htmlStr += '<span style="margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:'+color+';"></span>';
+                //圆点后面显示的文本
+                htmlStr += seriesName + '：' + value + '%';
+                htmlStr += '</div>';
+                }
+                return htmlStr;
+              }
+            },             
             series : [
                 {
                     name:'站立',
@@ -1344,9 +1421,9 @@ export default {
 
             },
             grid: {
-                left: 2,
-                bottom: 10,
-                right: 10,
+                left: '0.5%',
+                right: '4%',
+                bottom: '3%',
                 containLabel: true
             },
             xAxis: {
@@ -1486,7 +1563,7 @@ export default {
             ],
             series : [
                 {
-                    name:'活跃',
+                    name:'活跃度',
                     type:'line',
                     stack: '总量',
                     areaStyle: {
@@ -1850,18 +1927,31 @@ a {
   float: left;
 }
 .indexContentLeftButtomLine .linePictureInfo{
-  width: 1120px;
+  width: 1038px;
+  margin-left: 40px;
   height: 60px;
-  background-color: rgba(0,255,255,0.1);
+  /*background-color: rgba(0,255,255,0.1);*/
   float: left;
   font-size: 20px;
+}
+.linePictureInfo .stepDiv{
+  text-align:center;
+  position:absolute;
+}
+.linePictureInfo .stepDiv:hover{ 
+/*  background:'#ff0000';
+  cursor:pointer;
+  margin-top: 20px;*/
+  box-shadow: 0 0 10px #ccc; 
 }
 .linePictureInfo span{
   display: block;
   position: absolute;
   color: #6FAE92;
-  margin-top: 10px;
+  /*margin-top: 10px;*/
   cursor:pointer;
+  width:100%;
+  height:100%;
 }
 .index .indexContentLeftButtom .indexContentLeftButtomCount{
   width: 1300px;
