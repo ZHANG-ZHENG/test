@@ -88,6 +88,8 @@
             </div>
   
             <div class="linePicture">
+              <div class="selectBlockDiv" v-bind:style="selectBlockDivStyle"></div>
+              <div id="linePicture1Info" v-show="linePictureSelect == 1"></div>
               <div id="linePicture0" v-show="linePictureSelect == 0" style="width: 1120px;height: 300px"></div>
               <div id="linePicture1" v-show="linePictureSelect == 1" style="width: 1120px;height: 300px"></div>
               <div id="linePicture2" v-show="linePictureSelect == 2" style="width: 1120px;height: 300px"></div>
@@ -102,7 +104,14 @@
                   </span>                  
                 </el-tooltip>
               </div>
-            </div>      
+            </div> 
+            <div class="linePictureTimeBar" > 
+              <div class="linePictureTimeBarBlock" style="background: #94DDAF;"></div><div class="linePictureTimeBarText">教师授课</div>
+              <div class="linePictureTimeBarBlock" style="background: #33A4DF;"></div><div class="linePictureTimeBarText">挑人</div> 
+              <div class="linePictureTimeBarBlock" style="background: #ADCD29;"></div><div class="linePictureTimeBarText">提问</div> 
+              <div class="linePictureTimeBarBlock" style="background: #2BDED3;"></div><div class="linePictureTimeBarText">讨论</div> 
+            </div>  
+
           </div>
           <div class="indexContentLeftButtomCount">
             <div class="indexContentLeftButtomCountTeacher">
@@ -111,7 +120,7 @@
               </div>
               <div id="teacherPie1" style="width: 100%;height: 100%;float:left;"></div>
               <div class="teacherPie1Bg">
-                <div style="text-align:center;margin-top:55px">
+                <div style="text-align:center;margin-top:63px">
                   <font style="color:#ffffff;font-size:25px;text-align:center">{{setpSelectSpendTime}}</font>
                   <font style="color:#ffffff;font-size:12px;text-align:center">分钟</font>
                 </div>
@@ -133,9 +142,8 @@
                 <div id="pieDataCount0" v-show="linePictureSelect == 0" style="width: 356px;height: 220px;"></div>
                 <div id="pieDataCount1" v-show="linePictureSelect == 1" style="width: 356px;height: 220px;"></div>
                 <div id="pieDataCount2" v-show="linePictureSelect == 2" style="width: 356px;height: 220px;"></div>
-                <div v-show="linePictureSelect == 3" style="width: 356px;height: 220px;text-align:center">
-                  <!-- <div style="color:#ffffff;margin-top:100px;text-align:center">结合教室拍摄截图的活跃度热力图</div> -->
-                  <img :src="acthotsSrc" style="width:80%;height:80%;margin-top:35px">
+                <div id="pieDataCount3" v-show="linePictureSelect == 3" style="width: 356px;height: 220px;">
+                  <img id="pieDataCount3Img" :src="acthotsSrc">
                 </div>
               </div> 
             </div>                        
@@ -248,12 +256,16 @@ export default {
       stepSelect : {
         "end": 2580,
         "id": 1,
-        "type": 3,
+        "type": -2,
         "begin": 61,
         "good": 0
       },
       timespan: 4680,
-
+      selectBlockDivStyle : {
+        'width':  '100px',
+        'marginLeft': '50px',
+        // 'display': displayDiv,
+      },
       // opinionTeacherData1:[
       //   {value:15, name:'时长'},
       //   {value:45, name:''}
@@ -323,7 +335,7 @@ export default {
 
       playerOptions : {
         playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
-        autoplay: true, //如果true,浏览器准备好时开始回放。
+        autoplay: false, //如果true,浏览器准备好时开始回放。
         muted: false, // 默认情况下将会消除任何音频。
         loop: true, // 导致视频一结束就重新开始。
         preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
@@ -390,9 +402,7 @@ export default {
     },    
     setpSelectSpendTime: function(){ 
       return Math.round((this.stepSelect.end - this.stepSelect.begin)/60);
-    },    
-    //0:老师授课 1:提问, 2:讨论, 3:挑人
-
+    },      
   },
   watch: {
     stepSelect(nowStep, oldStep) {
@@ -478,7 +488,20 @@ export default {
         }
       
       });       
-         
+      //折线图选中样式
+      var widthDiv = ((this.stepSelect.end-this.stepSelect.begin)/this.timespan*1028)+1 + 'px';
+      var marginLeftNum = 50 + this.stepSelect.begin/this.timespan*1028;
+      var displayDiv = '';
+      if(this.stepSelect.type == -2){
+        displayDiv = 'none';
+      }
+      var selectBlockDivStyleNow = {
+        'width':  widthDiv,
+        'marginLeft': marginLeftNum+'px',
+        'display': displayDiv,
+      };    
+      this.selectBlockDivStyle = selectBlockDivStyleNow;
+      //this.getSelectBlockDivStyle();
       //播放
       if(this.$refs.videoPlayer.player.src()!=""){
         this.$refs.videoPlayer.player.currentTime(beginTime);
@@ -526,11 +549,11 @@ export default {
         height = '48px';
       }else{
         height = '18px';
-        marginTop ='16px';
+        marginTop ='6px';
         backgroundImage = '';
-        var left = stepOne.begin/this.timespan*1038;
+        var left = stepOne.begin/this.timespan*1028;
         marginLeft = left + 'px';
-        width = ((stepOne.end-stepOne.begin)/this.timespan*1038)+1 + 'px';
+        width = ((stepOne.end-stepOne.begin)/this.timespan*1028)+1 + 'px';
       }
       if(stepOne.type == -2){
         backgroundColor = '#ff000000';
@@ -556,7 +579,8 @@ export default {
 
       };
       return style;     
-    },    
+    },  
+   
     timeToFormatMinSec:function(times){
       var result = '00:00';
       var minute,second
@@ -1775,6 +1799,7 @@ a {
   width: 1920px;
   /*height: 1080px;*/
   height: 1080px;
+  overflow: hidden;
 }
 .index .indexTitle{
   height: 110px;
@@ -1926,13 +1951,52 @@ a {
   /*background-color: rgba(0,255,255,0.1);*/
   float: left;
 }
+.linePicture .selectBlockDiv{
+  position:absolute;
+  /*background:rgba(255,255,255,0.5);;*/
+  height:271px;
+  background: -webkit-linear-gradient(red, blue); /* Safari 5.1 - 6.0 */ 
+  background: -o-linear-gradient(red, blue); /* Opera 11.1 - 12.0 */  
+  background: -moz-linear-gradient(red, blue); /* Firefox 3.6 - 15 */  
+  background: linear-gradient(rgba(255,255,255,0.0), rgba(255,255,255,0.2)); /* 标准的语法 */   
+}
+.linePicture #linePicture1Info{
+  width:35px;
+  height:91px;
+  position:absolute;
+  margin-top: 180px;
+  margin-left: -15px;
+  background:url(../assets/lineLegend.png);
+}
 .indexContentLeftButtomLine .linePictureInfo{
-  width: 1038px;
-  margin-left: 40px;
-  height: 60px;
+  width: 1028px;
+  margin-left: 50px;
+  height: 30px;
   /*background-color: rgba(0,255,255,0.1);*/
   float: left;
   font-size: 20px;
+}
+.indexContentLeftButtomLine .linePictureTimeBar{
+  width: 628px;
+  margin-left: 350px;
+  height: 30px;
+  /*background: #ff0000;*/
+  float: left;
+  text-align: center;
+}
+.linePictureTimeBar .linePictureTimeBarBlock{
+  width: 25px;
+  height: 16px;
+  border-radius:4px;
+  margin-top: 3px;
+  float: left;
+}
+.linePictureTimeBar .linePictureTimeBarText{
+  height: 16px;
+  float: left;
+  color: #ffffff;
+  margin-left: 4px;
+  margin-right: 15px;
 }
 .linePictureInfo .stepDiv{
   text-align:center;
@@ -1970,7 +2034,7 @@ a {
   height:187px;
   width:187px;
   /*float: left;*/
-  margin-top:22px;
+  margin-top:23px;
   margin-left:134px;
   background:url(../assets/stepTimeBg.png);
   background-repeat: no-repeat;
@@ -2018,6 +2082,21 @@ a {
   margin: 10px;
   text-align: center;
   position: absolute;
+}
+.indexContentLeftButtomCountData #pieDataCount3 #pieDataCount3Img{
+  width:80%;
+  height:80%;
+  position:relative;
+  right: -35px;
+  bottom: -40px;
+  
+}
+.indexContentLeftButtomCountData #pieDataCount3 #pieDataCount3Img:hover{
+  width:300%;
+  height:300%;
+  right: 750px;
+  bottom: 444px;  
+  
 }
 .index .indexContentRight{
   width: 427px;
