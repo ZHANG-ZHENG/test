@@ -238,20 +238,7 @@ export default {
             "begin": 2581,
             "good": 0
         },
-        {
-            "end": 3150,
-            "id": 3,
-            "type": 1,
-            "begin": 3001,
-            "good": 0
-        },
-        {
-            "end": 3420,
-            "id": 4,
-            "type": 2,
-            "begin": 3151,
-            "good": 0
-        }
+        
       ],
       stepSelect : {
         "end": 2580,
@@ -260,7 +247,7 @@ export default {
         "begin": 61,
         "good": 0
       },
-      timespan: 4680,
+      timespan: 3000,
       selectBlockDivStyle : {
         'width':  '100px',
         'marginLeft': '50px',
@@ -554,6 +541,8 @@ export default {
         var left = stepOne.begin/this.timespan*1028;
         marginLeft = left + 'px';
         width = ((stepOne.end-stepOne.begin)/this.timespan*1028)+1 + 'px';
+        //marginLeft = '0px';
+        //width = '1028px';
       }
       if(stepOne.type == -2){
         backgroundColor = '#ff000000';
@@ -601,8 +590,13 @@ export default {
     },
     httpClassInfo: function() {
       //console.log("httpAiClsresult");    
+      //console.log(this.$utils.getUrlKey("id")); 
+      var idParam = '';
+      if(this.$utils.getUrlKey("id") != null){
+        idParam = '?id='+this.$utils.getUrlKey("id")
+      }
       let vm = this;
-      this.$http.get('/analysis/ai/info',{})
+      this.$http.post('/analysis/ai/info'+idParam,{})
         .then(function(response){
         vm.courseName = response.body.data.courseName;
         vm.sourseTitle = " "+response.body.data.sourseTitle;
@@ -619,9 +613,13 @@ export default {
     },  
 
     httpStudentInfo: function() {
-      //console.log("httpAiClsresult");    
+      //console.log("httpAiClsresult");  
+      var idParam = '';
+      if(this.$utils.getUrlKey("id") != null){
+        idParam = '?id='+this.$utils.getUrlKey("id")
+      }  
       let vm = this;
-      this.$http.get('/analysis/ai/student',{})
+      this.$http.get('/analysis/ai/student'+idParam,{})
         .then(function(response){
         vm.studentTop10 = [];
         response.body.data.students.forEach(item => {
@@ -635,9 +633,13 @@ export default {
       );    
     },    
     httpAiClsresult: function() {
-      //console.log("httpAiClsresult");    
+      //console.log("httpAiClsresult"); 
+      var idParam = '';
+      if(this.$utils.getUrlKey("id") != null){
+        idParam = '?id='+this.$utils.getUrlKey("id")
+      }           
       let vm = this;
-      this.$http.get('/analysis/ai/clsresult',{})
+      this.$http.get('/analysis/ai/clsresult'+idParam,{})
         .then(function(response){
           //响应成功回调
           //console.log(response);
@@ -665,13 +667,18 @@ export default {
       );    
     },
     httpAiAnaly: function() {
-      //console.log("httpAiAnaly");     
+      //console.log("httpAiAnaly");
+      var idParam = '';
+      if(this.$utils.getUrlKey("id") != null){
+        idParam = '?id='+this.$utils.getUrlKey("id")
+      }      
       let vm = this;
       //this.$http.get('http://scuclass.ruijie.com.cn/analysis/ai/analy',{})
-      this.$http.get('/analysis/ai/analy',{})
+      this.$http.get('/analysis/ai/analy'+idParam,{})
         .then(function(response){
           //响应成功回调
           console.log(response);
+          vm.timespan = response.body.data.timespan;
           //console.log(response.body.data.emotion);
           //折线图0
           vm.emotionXAxisData = [];

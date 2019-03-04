@@ -9,6 +9,8 @@ import VueResource from 'vue-resource'
 import App from './App'
 import router from './router'
 
+import utils from './utils'
+Vue.prototype.$utils=utils
  // import IEcharts from 'vue-echarts-v3'
  // import 'echarts/lib/chart/line'
  // Vue.prototype.$IEcharts = IEcharts
