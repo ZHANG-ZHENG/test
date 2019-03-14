@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>{{ msg }} <router-link to="/main">main</router-link></h1>
-    
+    <h1>本站为分布式系统部署学习网站，公开架构设计，模块部署，源码等所有资料。</h1>
+    <h1><router-link to="/main">点击进入</router-link></h1>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 export default {
   data () {
     return {
-      msg: 'Welcome to zzhost website index'
+      msg: '你好 '
     }
   },
   methods: {

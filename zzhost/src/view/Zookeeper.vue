@@ -1,0 +1,9 @@
+<template>
+  <div>
+  	<p>zookeeper部署</p>
+	<p>
+		<a href="http://note.youdao.com/noteshare?id=227713f7db3a81ffcde76828a0742c43&sub=40FD408025634808A053962825EC9FBD" target="_blank">点击查看</a>
+	</p>
+  </div>
+
+</template>

@@ -1,4 +1,4 @@
-# zzhost
+# zzhostmgr
 
 > A Vue.js project
 

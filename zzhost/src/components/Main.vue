@@ -1,18 +1,19 @@
 <template>
   <div>
-    <h1>{{ msg }} <router-link to="/index">index</router-link></h1>
+    <!-- <h1>{{ msg }} <router-link to="/index">index</router-link></h1> -->
     
     <el-row class="tac">
       <el-col :span="4">
         <el-menu
-          default-active="2"
+          default-active="summary"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
-          background-color="#545c64"
+          background-color="#FFFFFF"
           text-color="#fff"
           active-text-color="#ffd04b">
-          <el-submenu index="1">
+
+<!--           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>导航一</span>
@@ -30,6 +31,7 @@
               <el-menu-item index="1-4-1">选项1</el-menu-item>
             </el-submenu>
           </el-submenu>
+
           <el-menu-item index="2">
             <i class="el-icon-menu"></i>
             <span slot="title">导航二</span>
@@ -37,23 +39,112 @@
           <el-menu-item index="3" disabled>
             <i class="el-icon-document"></i>
             <span slot="title">导航三</span>
-          </el-menu-item>
-          <el-menu-item index="4">
+          </el-menu-item> -->
+
+          <el-menu-item index="summary">
+            <i class="el-icon-setting"></i>
+            <span slot="title"><router-link to="/main/summary">概述</router-link></span>
+          </el-menu-item>  
+          <el-menu-item index="docker">
+            <i class="el-icon-setting"></i>
+            <span slot="title"><router-link to="/main/docker">docker</router-link></span>
+          </el-menu-item>                  
+          <el-menu-item index="java">
             <i class="el-icon-setting"></i>
             <span slot="title"><router-link to="/main/java">java</router-link></span>
           </el-menu-item>
-          <el-menu-item index="5">
+          <el-menu-item index="web">
             <i class="el-icon-setting"></i>
             <span slot="title"><router-link to="/main/web">web</router-link></span>
           </el-menu-item>
+
+          <el-submenu index="web">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span><router-link to="/main/web">web</router-link></span>
+            </template>
+<!--             <el-menu-item-group>
+              <template slot="title">
+                html
+              </template>
+            </el-menu-item-group> -->
+            <el-menu-item-group>
+              <template slot="title">
+                <router-link to="/main/web/vuePage">vue</router-link>
+              </template>
+            </el-menu-item-group>            
+          </el-submenu>
+
+          <el-menu-item index="mysql">
+            <i class="el-icon-setting"></i>
+            <span slot="title"><router-link to="/main/mysql">mysql</router-link></span>
+          </el-menu-item>
+          <el-menu-item index="redis">
+            <i class="el-icon-setting"></i>
+            <span slot="title"><router-link to="/main/redis">redis</router-link></span>
+          </el-menu-item>
+          <el-menu-item index="memcached">
+            <i class="el-icon-setting"></i>
+            <span slot="title"><router-link to="/main/memcached">memcached</router-link></span>
+          </el-menu-item>          
+          <el-menu-item index="mongo">
+            <i class="el-icon-setting"></i>
+            <span slot="title"><router-link to="/main/mongo">mongo</router-link></span>
+          </el-menu-item>
+          <el-menu-item index="fastdfs">
+            <i class="el-icon-setting"></i>
+            <span slot="title"><router-link to="/main/fastdfs">FastDFS</router-link></span>
+          </el-menu-item> 
+          <el-menu-item index="rabbitMQ">
+            <i class="el-icon-setting"></i>
+            <span slot="title"><router-link to="/main/rabbitMQ">rabbitMQ</router-link></span>
+          </el-menu-item>              
+          <el-menu-item index="zookeeper">
+            <i class="el-icon-setting"></i>
+            <span slot="title"><router-link to="/main/zookeeper">zookeeper</router-link></span>
+          </el-menu-item>                                               
           <el-menu-item index="6">
             <i class="el-icon-setting"></i>
-            <span slot="title">wechat</span>
+            <span slot="title"><router-link to="/main/wechat">wechat</router-link></span>
           </el-menu-item>    
           <el-menu-item index="7">
             <i class="el-icon-setting"></i>
-            <span slot="title">android</span>
-          </el-menu-item>       
+            <span slot="title"><router-link to="/main/android">android</router-link></span>
+          </el-menu-item>  
+          <el-menu-item index="linux">
+            <i class="el-icon-setting"></i>
+            <span slot="title"><router-link to="/main/linux">linux</router-link></span>
+          </el-menu-item>
+
+          <el-submenu index="mgr">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>站点管理</span>
+            </template>
+            <el-menu-item-group>
+              <template slot="title">
+                <a href="http://baidu.com" target="_blank">
+                  文本编辑
+                </a>
+              </template>
+            </el-menu-item-group>
+          </el-submenu>
+
+          <el-submenu index="1">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>部署相关</span>
+            </template>
+            <el-menu-item-group>
+              <template slot="title">maven</template>
+            </el-menu-item-group>
+            <el-menu-item-group title="git">
+            </el-menu-item-group>
+            <el-menu-item-group title="jenkins">
+            </el-menu-item-group>
+          </el-submenu>
+
+
         </el-menu>
       </el-col>
       <el-col :span="20">
@@ -109,4 +200,8 @@ export default {
     padding: 10px 0;
     background-color: #f9fafc;
   }
+  .el-submenu__title span{
+    color: #000000;
+  }
+
 </style>
