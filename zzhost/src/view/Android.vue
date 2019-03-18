@@ -1,6 +1,6 @@
 <template>
   <div>
-  	<p>android持续集成中</p>
+  	<p>https://github.com/ZHANG-ZHENG/BusinessEngineGuoXin.git</p>
   </div>
 
 </template>

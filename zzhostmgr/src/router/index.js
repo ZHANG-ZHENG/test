@@ -9,11 +9,10 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'ContentEdit',
-      component: ContentEdit
+      redirect: '/contentEdit'
     },
     {
-      path: 'contentEdit',
+      path: '/contentEdit',
       name: 'ContentEdit',
       component: ContentEdit
     }    

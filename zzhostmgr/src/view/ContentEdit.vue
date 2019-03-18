@@ -7,8 +7,11 @@
 			  <el-form-item label="内容">
 			    <el-input v-model="form.val"></el-input>
 			  </el-form-item>
+        <el-form-item label="标记1">
+          <el-input v-model="form.tag1"></el-input>
+        </el-form-item>        
 			  <el-form-item>
-		    	<el-button type="primary">提交</el-button>
+		    	<el-button type="primary" @click="httpAddContentBean">提交</el-button>
 		  	</el-form-item>	
 			</el-form>	
   	</div> 
@@ -28,6 +31,7 @@ export default {
 		contentList: [],
 	    form: {
 	      val: '',
+        tag1: '',
 	    }      
     }
   },
@@ -36,7 +40,7 @@ export default {
       //console.log("httpAiClsresult");    
  
       let vm = this;
-      this.$http.post('/mongo/content/list')
+      this.$http.post('/cloud/mongo/content/list')
         .then(function(response){
         	console.log(response.body);
        		vm.contentList = response.body;
@@ -45,6 +49,18 @@ export default {
         }
       );    
     },
+    httpAddContentBean: function() {
+      let vm = this;
+      console.log(vm.form);
+      this.$http.post('/cloud/mongo/content/addContent',vm.form)
+        .then(function(response){
+          console.log(response.body);
+          vm.httpGetList();
+        },function(response){
+          //响应错误回调
+        }
+      );    
+    },    
   },
   mounted(){
   	this.httpGetList();

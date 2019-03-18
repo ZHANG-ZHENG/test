@@ -11,7 +11,9 @@
   	<p>docker weave跨主机通信</p>
 	<p>
 		<a href="http://note.youdao.com/noteshare?id=ef0f0b67e965396e0b835fd7be268ee1&sub=A42CDD8587064476BB3DC3DFC34B3120" target="_blank">点击查看</a>
-	</p>		
+	</p>
+	<p>dockerhub仓库地址 https://cloud.docker.com/repository/docker/zzsgame</p>	
+	<p>docker阿里仓库地址 registry.cn-hangzhou.aliyuncs.com/zzdocker</p>	
   </div>
 
 </template>

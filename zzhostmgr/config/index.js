@@ -11,7 +11,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        '/mongo/**': 'http://127.0.0.1:8888',
+        '/cloud/mongo/**': 'http://127.0.0.1:8888',
     },
 
     // Various Dev Server settings
@@ -45,7 +45,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: '/zzhostmgr/',
 
     /**
      * Source Maps

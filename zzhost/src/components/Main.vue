@@ -1,6 +1,19 @@
 <template>
   <div>
-    <!-- <h1>{{ msg }} <router-link to="/index">index</router-link></h1> -->
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
+      <img id="logoimg" src="../assets/logo-z.jpg" alt="">
+      <el-menu-item index="1" style="float:right;"><router-link to="/index">首页</router-link></el-menu-item>
+      <el-menu-item index="4" style="float:right;"><a href="http://106.12.122.128/zzhostmgr" target="_blank">后台管理</a></el-menu-item>
+      <el-submenu style="float:right;" index="2">
+        <template slot="title">我的工作台</template>
+        <el-menu-item index="2-1" disabled>账号</el-menu-item>
+        <el-submenu index="2-4">
+          <template slot="title">其他</template>
+          <el-menu-item index="2-4-1" disabled>密码管理</el-menu-item>
+        </el-submenu>
+      </el-submenu>  
+    </el-menu>
+    <div class="line"></div>
     
     <el-row class="tac">
       <el-col :span="4">
@@ -52,10 +65,6 @@
           <el-menu-item index="java">
             <i class="el-icon-setting"></i>
             <span slot="title"><router-link to="/main/java">java</router-link></span>
-          </el-menu-item>
-          <el-menu-item index="web">
-            <i class="el-icon-setting"></i>
-            <span slot="title"><router-link to="/main/web">web</router-link></span>
           </el-menu-item>
 
           <el-submenu index="web">
@@ -147,7 +156,7 @@
 
         </el-menu>
       </el-col>
-      <el-col :span="20">
+      <el-col :span="20" class="contentSty">
         <router-view/>
       </el-col>
     </el-row>
@@ -204,4 +213,11 @@ export default {
     color: #000000;
   }
 
+  #logoimg{
+    width: 70px;
+    height: 70px；
+  }
+  .contentSty{
+    text-align: center;
+  }
 </style>
