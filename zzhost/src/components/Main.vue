@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainDiv">
     <el-menu  class="el-menu-demo" mode="horizontal"><!-- :default-active="activeIndex" -->
       <img id="logoimg" src="../assets/logo-z.jpg" alt="">
       <el-menu-item index="1" style="float:right;"><router-link to="/index">首页</router-link></el-menu-item>
@@ -185,6 +185,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .mainDiv {
+    background:url(../assets/bg.jpg);
+
+  }
+
   .el-row {
     margin-bottom: 20px;
     &:last-child {
