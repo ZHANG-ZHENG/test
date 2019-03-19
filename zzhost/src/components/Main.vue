@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
+    <el-menu  class="el-menu-demo" mode="horizontal"><!-- :default-active="activeIndex" -->
       <img id="logoimg" src="../assets/logo-z.jpg" alt="">
       <el-menu-item index="1" style="float:right;"><router-link to="/index">首页</router-link></el-menu-item>
       <el-menu-item index="4" style="float:right;"><a href="http://106.12.122.128/zzhostmgr" target="_blank">后台管理</a></el-menu-item>
