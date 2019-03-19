@@ -127,7 +127,7 @@
           <el-submenu index="build">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>部署相关</span>
+              <span>持续集成</span>
             </template>
             <el-menu-item-group>
               <template slot="title"><router-link to="/main/nexus">nexus/maven</router-link></template>
@@ -137,6 +137,19 @@
             </el-menu-item-group>
             <el-menu-item-group>
               <template slot="title"><router-link to="/main/jenkins">jenkins</router-link></template>
+            </el-menu-item-group>
+          </el-submenu>
+
+          <el-submenu index="test">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>自动化测试</span>
+            </template>
+            <el-menu-item-group>
+              <template slot="title">jmeter</template>
+            </el-menu-item-group>
+            <el-menu-item-group>
+              <template slot="title">selenium checkstyle findbugs</template>
             </el-menu-item-group>
           </el-submenu>
 
