@@ -15,6 +15,8 @@
     </el-menu>
     <div class="line"></div>
     
+<!--     <div style="height:100%;">
+    <el-scrollbar style="height:100%"> -->
     <el-row class="tac">
       <el-col :span="4">
         <el-menu
@@ -26,34 +28,6 @@
           text-color="#fff"
           active-text-color="#ffd04b">
 
-<!--           <el-submenu index="1">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>导航一</span>
-            </template>
-            <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="1-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="1-4-1">选项1</el-menu-item>
-            </el-submenu>
-          </el-submenu>
-
-          <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
-          </el-menu-item>
-          <el-menu-item index="3" disabled>
-            <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
-          </el-menu-item> -->
-
           <el-menu-item index="summary">
             <i class="el-icon-setting"></i>
             <span slot="title"><router-link to="/main/summary">概述</router-link></span>
@@ -61,11 +35,20 @@
           <el-menu-item index="docker">
             <i class="el-icon-setting"></i>
             <span slot="title"><router-link to="/main/docker">docker</router-link></span>
-          </el-menu-item>                  
-          <el-menu-item index="java">
-            <i class="el-icon-setting"></i>
-            <span slot="title"><router-link to="/main/java">java</router-link></span>
           </el-menu-item>
+
+          <el-submenu index="java">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span slot="title"><router-link to="/main/java">java</router-link></span>            
+            </template>
+            <el-menu-item-group>
+              <template slot="title"><router-link to="/main/design-pattern">设计模式</router-link></template>
+            </el-menu-item-group>
+            <el-menu-item-group>
+              <template slot="title"><router-link to="/main/java-frame">JAVA框架</router-link></template>
+            </el-menu-item-group>            
+          </el-submenu>
 
           <el-submenu index="web">
             <template slot="title">
@@ -104,14 +87,30 @@
             <i class="el-icon-setting"></i>
             <span slot="title"><router-link to="/main/fastdfs">FastDFS</router-link></span>
           </el-menu-item> 
-          <el-menu-item index="rabbitMQ">
-            <i class="el-icon-setting"></i>
-            <span slot="title"><router-link to="/main/rabbitMQ">rabbitMQ</router-link></span>
-          </el-menu-item>              
-          <el-menu-item index="zookeeper">
+ 
+          <el-submenu index="rabbitMQ">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span slot="title"><router-link to="/main/rabbitMQ">rabbitMQ</router-link></span>            
+            </template>
+            <el-menu-item-group>
+              <template slot="title"><router-link to="/main/mq-transaction">事务</router-link></template>
+            </el-menu-item-group>            
+          </el-submenu>
+
+          <el-submenu index="zookeeper">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span slot="title"><router-link to="/main/zookeeper">zookeeper</router-link></span>            
+            </template>
+            <el-menu-item-group>
+              <template slot="title"><router-link to="/main/zoo-transaction">事务</router-link></template>
+            </el-menu-item-group>            
+          </el-submenu>
+<!--           <el-menu-item index="zookeeper">
             <i class="el-icon-setting"></i>
             <span slot="title"><router-link to="/main/zookeeper">zookeeper</router-link></span>
-          </el-menu-item>                                               
+          </el-menu-item>  -->                                              
           <el-menu-item index="6">
             <i class="el-icon-setting"></i>
             <span slot="title"><router-link to="/main/wechat">wechat</router-link></span>
@@ -124,6 +123,22 @@
             <i class="el-icon-setting"></i>
             <span slot="title"><router-link to="/main/linux">linux</router-link></span>
           </el-menu-item>
+
+          <el-submenu index="build">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>部署相关</span>
+            </template>
+            <el-menu-item-group>
+              <template slot="title"><router-link to="/main/nexus">nexus/maven</router-link></template>
+            </el-menu-item-group>
+            <el-menu-item-group>
+              <template slot="title"><router-link to="/main/git">git</router-link></template>
+            </el-menu-item-group>
+            <el-menu-item-group>
+              <template slot="title"><router-link to="/main/jenkins">jenkins</router-link></template>
+            </el-menu-item-group>
+          </el-submenu>
 
           <el-submenu index="mgr">
             <template slot="title">
@@ -138,28 +153,15 @@
               </template>
             </el-menu-item-group>
           </el-submenu>
-
-          <el-submenu index="1">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>部署相关</span>
-            </template>
-            <el-menu-item-group>
-              <template slot="title">maven</template>
-            </el-menu-item-group>
-            <el-menu-item-group title="git">
-            </el-menu-item-group>
-            <el-menu-item-group title="jenkins">
-            </el-menu-item-group>
-          </el-submenu>
-
-
         </el-menu>
       </el-col>
       <el-col :span="20" class="contentSty">
         <router-view/>
       </el-col>
+
     </el-row>
+<!--     </el-scrollbar>
+    </div> -->
   </div>
 </template>
 
