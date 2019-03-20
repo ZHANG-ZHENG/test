@@ -55,6 +55,11 @@
               <i class="el-icon-location"></i>
               <span><router-link to="/main/web">web</router-link></span>
             </template>
+            <el-menu-item-group>
+              <template slot="title">
+                <router-link to="/main/responsive-layout">响应式</router-link>
+              </template>
+            </el-menu-item-group>             
 <!--             <el-menu-item-group>
               <template slot="title">
                 html
@@ -251,4 +256,16 @@ export default {
   .contentSty{
     text-align: center;
   }
+@media screen and (max-width: 600px) {
+  .tac-t{
+    height:0%;
+    overflow:hidden;
+  }
+  .tac-l{
+    display:none;
+  }
+  .tac-r{
+    width:100%;
+  }
+}
 </style>

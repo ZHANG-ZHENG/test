@@ -8,6 +8,7 @@ import JavaFrame from '@/view/java/JavaFrame'
 import Web from '@/view/Web'
 import VuePage from '@/view/web/VuePage'
 import HtmlPage from '@/view/web/HtmlPage'
+import ResponsiveLayout from '@/view/web/ResponsiveLayout'
 import Summary from '@/view/Summary'
 import Docker from '@/view/Docker'
 import Android from '@/view/Android'
@@ -101,6 +102,11 @@ export default new Router({
           name: 'VuePage',
           component: VuePage
         },
+        {
+          path: '/main/responsive-layout',
+          name: 'ResponsiveLayout',
+          component: ResponsiveLayout
+        },        
         {
           path: '/main/htmlPage',
           name: 'HtmlPage',
