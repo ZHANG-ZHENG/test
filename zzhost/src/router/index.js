@@ -26,6 +26,7 @@ import ZooTransaction from '@/view/zookeeper/ZooTransaction'
 import Git from '@/view/build/Git'
 import Jenkins from '@/view/build/Jenkins'
 import Nexus from '@/view/build/Nexus'
+import CDN from '@/view/loadBalance/CDN'
 
 Vue.use(Router)
 
@@ -161,7 +162,12 @@ export default new Router({
           path: '/main/nexus',
           name: 'Nexus',
           component: Nexus
-        },                       
+        },  
+        {
+          path: '/main/cdn',
+          name: 'CDN',
+          component: CDN
+        },                             
       ] 
     },
     {

@@ -158,6 +158,22 @@
             </el-menu-item-group>
           </el-submenu>
 
+          <el-submenu index="loadBalance">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>负载均衡</span>
+            </template>
+            <el-menu-item-group>
+              <template slot="title"><router-link to="/main/CDN">CDN</router-link></template>
+            </el-menu-item-group>
+            <el-menu-item-group>
+              <template slot="title">nginx</template>
+            </el-menu-item-group>
+            <el-menu-item-group>
+              <template slot="title">LVS</template>
+            </el-menu-item-group>            
+          </el-submenu>
+
           <el-submenu index="mgr">
             <template slot="title">
               <i class="el-icon-location"></i>
