@@ -1,6 +1,6 @@
 <template>
   <div class="mainDiv">
-    <el-menu  class="el-menu-demo" mode="horizontal"><!-- :default-active="activeIndex" -->
+    <el-menu  class="el-menu-demo tac-t" mode="horizontal"><!-- :default-active="activeIndex" -->
       <img id="logoimg" src="../assets/logo-z.jpg" alt="">
       <el-menu-item index="1" style="float:right;"><router-link to="/index">首页</router-link></el-menu-item>
       <el-menu-item index="4" style="float:right;"><a href="http://106.12.122.128/zzhostmgr" target="_blank">后台管理</a></el-menu-item>
@@ -18,7 +18,7 @@
 <!--     <div style="height:100%;">
     <el-scrollbar style="height:100%"> -->
     <el-row class="tac">
-      <el-col :span="4">
+      <el-col :span="4" class="tac-l">
         <el-menu
           default-active="summary"
           class="el-menu-vertical-demo"
@@ -168,7 +168,7 @@
           </el-submenu>
         </el-menu>
       </el-col>
-      <el-col :span="20" class="contentSty">
+      <el-col :span="20" class="contentSty tac-r">
         <router-view/>
       </el-col>
 
@@ -199,8 +199,19 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .mainDiv {
+    height:100%;
     background:url(../assets/bg.jpg);
 
+  }
+  .tac-t{
+    height:8%;
+  }
+  .tac{
+    height:88%;
+  }
+  .tac-l,.tac-r{
+    height:100%;
+    overflow-y:auto;
   }
 
   .el-row {
