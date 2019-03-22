@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import Pmp from '@/components/Pmp'
 import Main from '@/components/Main'
 import Java from '@/view/Java'
 import DesignPattern from '@/view/java/DesignPattern'
@@ -37,6 +38,16 @@ export default new Router({
       path: '/', 
       redirect: '/index'
     },
+    {
+      path: '/pmp',
+      name: 'Pmp',
+      component: Pmp,     
+    },   
+    {
+      path: '/index',
+      name: 'HelloWorld',
+      component: HelloWorld,     
+    },     
     {
       path: '/main',
       redirect:'/main/summary',
@@ -169,11 +180,6 @@ export default new Router({
           component: CDN
         },                             
       ] 
-    },
-    {
-      path: '/index',
-      name: 'HelloWorld',
-      component: HelloWorld,     
-    },      
+    },     
   ]
 })
