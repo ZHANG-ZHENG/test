@@ -277,6 +277,13 @@ export default {
     height:0%;
     overflow:hidden;
   }
+  .el-menu-item{
+    margin: 0px;
+    padding-left: 0px;
+  }
+  .el-icon-location,.el-icon-setting{
+    display:none;
+  }
   .tac-l{
     display:none;
   }
