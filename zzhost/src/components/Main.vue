@@ -11,7 +11,8 @@
           <template slot="title">其他</template>
           <el-menu-item index="2-4-1" disabled>密码管理</el-menu-item>
         </el-submenu>
-      </el-submenu>  
+      </el-submenu>
+      <el-menu-item index="4" style="float:right;"><a href="http://zzhost.top:5000" target="_blank">聊天室</a></el-menu-item>  
     </el-menu>
     <div class="line"></div>
     
@@ -49,6 +50,13 @@
               <template slot="title"><router-link to="/main/java-frame">JAVA框架</router-link></template>
             </el-menu-item-group>            
           </el-submenu>
+
+          <el-submenu index="java">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span slot="title"><router-link to="/main/python">python</router-link></span>            
+            </template>           
+          </el-submenu>          
 
           <el-submenu index="web">
             <template slot="title">

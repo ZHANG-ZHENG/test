@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Pmp from '@/components/Pmp'
 import Main from '@/components/Main'
 import Java from '@/view/Java'
+import Python from '@/view/Python'
 import DesignPattern from '@/view/java/DesignPattern'
 import JavaFrame from '@/view/java/JavaFrame'
 import Web from '@/view/Web'
@@ -94,6 +95,11 @@ export default new Router({
           name: 'Java',
           component: Java
         },
+        {
+          path: '/main/python',
+          name: 'Python',
+          component: Python
+        },        
         {
           path: '/main/design-pattern',
           name: 'DesignPattern',

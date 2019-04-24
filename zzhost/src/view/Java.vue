@@ -1,7 +1,7 @@
 <template>
   <div >
   <div>
-  	<p>本站微服务源码地址</p>
+  	<p>本站微服务源码地址</p>{{getColor}}
 	<p>
 		<a href="https://github.com/ZHANG-ZHENG/cloud-project.git" target="_blank">https://github.com/ZHANG-ZHENG/cloud-project.git</a>
 	</p>
@@ -26,8 +26,10 @@
 export default {
   data: function() {
     return {
-
+		getColor: this.GLOBAL.getRandColor,
     }
   },
+
+
 }
 </script>
